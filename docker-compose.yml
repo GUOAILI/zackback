@@ -1,0 +1,21 @@
+version: "3"
+services:
+  zackback:
+    image: zackback
+    ports:
+      - "9100:9100"
+    networks:
+      - zackback-mysql
+    depends_on:
+      - mysqldb
+ 
+  mysqldb:
+    image: mysql:8
+    networks:
+      - zackback-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=dockerzack
+
+networks:
+  zackback-mysql: 

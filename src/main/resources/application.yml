@@ -1,0 +1,49 @@
+# 指定项目端口号
+server:
+  port: 9000
+
+spring:
+  application:
+    name: zackback
+
+  datasource:
+    username: root
+    # need change
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # this configuration is for it test only
+    url: jdbc:mysql://localhost:3306/zack?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8&&serverTimezone=UTC
+
+    # 2022/6/28 for dockerizing the springboot app, i need change the mysql setting
+    # note that mysql is also treated as docker container
+    # for docker and access mysql on docker as another container 
+    # url: jdbc:mysql://mysqldb:3306/zack?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8&&serverTimezone=UTC
+
+    # 2022/6/29 let the docker access local mysql (for docker but access local mysql)
+    # url: jdbc:mysql://host.docker.internal:3306/zack?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8&&serverTimezone=UTC
+    
+  jpa:
+    # database: MYSQL
+    # database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        # dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      generate-ddl: true # 需要加上这个才能自动生成数据库表
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 100MB
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /v3/api-docs    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

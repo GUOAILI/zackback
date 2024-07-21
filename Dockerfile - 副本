@@ -1,0 +1,4 @@
+FROM openjdk:17
+LABEL maintainer ="zhoujd@hotmail.co.jp"
+ADD target/zackback-0.0.1-SNAPSHOT.jar zackback.jar
+ENTRYPOINT ["java","-jar","zackback.jar"]
